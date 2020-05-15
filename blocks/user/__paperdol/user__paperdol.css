@@ -1,0 +1,11 @@
+.user__paperdol {
+    max-width: 364;
+    margin-left: 36px;
+}
+
+@media screen and (max-width: 767px) {
+    .user__paperdol {
+        margin-left: 0px;
+        align-items: center;
+    }
+}

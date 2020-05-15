@@ -1,0 +1,17 @@
+.sign {
+    font-size: 18px;
+    line-height: 22px;
+    color: #545454
+}
+
+@media screen and (max-width :1024px) {
+    .sign {
+        margin-left: 40px;
+    }
+}
+
+@media screen and (max-width :1024px) {
+    .sign {
+        margin-left: 0;
+    }
+}

@@ -1,0 +1,30 @@
+.user__place-button {
+    border: 1px solid #fff;
+    cursor: pointer;
+    width: 150px;
+    height: 50px;
+    font-size: 30px;
+    top: 16px;
+    right: 0;
+    background-color: #000;
+    color: #fff;
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.user__place-button:hover {
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 767px) {
+    .user__place-button {
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .user__place-button {
+        width: 282px;
+    }
+}

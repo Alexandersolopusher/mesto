@@ -1,0 +1,14 @@
+.user__subtittle {
+    font-size: 18px;
+    line-height: 22px;
+    font-style: normal;
+    font-weight: normal;
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    margin-top: 0;
+}
+
+@media screen and (max-width: 767px) {
+    .user__subtittle {
+        text-align: center;
+    }
+}
