@@ -1,0 +1,15 @@
+.user__pen-button {
+    background-image: url(../../../images/top.svg);
+    box-sizing: border-box;
+    background-repeat: none;
+    background-size: cover;
+    width: 10px;
+    height: 10px;
+}
+
+@media screen and (max-width: 565px) {
+    .user__pen-button {
+        width: 5px;
+        height: 5px;
+    }
+}

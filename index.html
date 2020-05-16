@@ -22,78 +22,79 @@
                 <div class="user__paperdol">
                     <div class="user__editnickname">
                         <h1 class="user__nickname">Верный Лоскутик</h1>
-                        <button class="user__edit"></button>
+                        <button class="user__edit" type="button">
+                            <div class="user__pen-button"></div>
+                        </button>
                     </div>
                     <p class="user__subtittle">Твой лучший друг</p>
                 </div>
-                <button class="user__place-button">+</button>
-
+                <button class="user__place-button" type="button">+</button>
             </div>
 
         </section>
 
-        <section class="elements">
-            <div class="element">
-                <img src="./images/anor_londo.jpg" class="element__image">
-                <div class="element__text">
-                    <h2 class="element__name">Анор - Лондо</h2>
-                    <button class="element__like"></button>
+        <section class="photo-gallery">
+            <div class="card">
+                <img src="./images/anor_londo.jpg" alt="собор_и_закат" class="card__image">
+                <div class="card__text">
+                    <h2 class="card__name">Анор - Лондо</h2>
+                    <button class="card__like" type="button"></button>
                 </div>
             </div>
 
-            <div class="element">
-                <img src="./images/painted-world.jpeg" class="element__image">
-                <div class="element__text">
-                    <h2 class="element__name">Олачиль</h2>
-                    <button class="element__like"></button>
+            <div class="card">
+                <img src="./images/painted-world.jpeg" alt="деревня_в_тумане" class="card__image">
+                <div class="card__text">
+                    <h2 class="card__name">Олачиль</h2>
+                    <button class="card__like" type="button"></button>
                 </div>
             </div>
 
-            <div class="element">
-                <img src="./images/deep-tample.jpg" class="element__image">
-                <div class="element__text">
-                    <h2 class="element__name">Храм Глубин</h2>
-                    <button class="element__like"></button>
+            <div class="card">
+                <img src="./images/deep-tample.jpg" alt="ворота" class="card__image">
+                <div class="card__text">
+                    <h2 class="card__name">Храм Глубин</h2>
+                    <button class="card__like" type="button"></button>
                 </div>
             </div>
 
-            <div class="element">
-                <img src="./images/fierling.jpg" class="element__image">
-                <div class="element__text">
-                    <h2 class="element__name">Храм Огня</h2>
-                    <button class="element__like"></button>
+            <div class="card">
+                <img src="./images/fierling.jpg" alt="место_для_костра" class="card__image">
+                <div class="card__text">
+                    <h2 class="card__name">Храм Огня</h2>
+                    <button class="card__like" type="button"></button>
                 </div>
             </div>
 
-            <div class="element">
-                <img src="./images/snow.jpg" class="element__image">
-                <div class="element__text">
-                    <h2 class="element__name">Лунный Лондо</h2>
-                    <button class="element__like"></button>
+            <div class="card">
+                <img src="./images/snow.jpg" alt="город_в_снегу" class="card__image">
+                <div class="card__text">
+                    <h2 class="card__name">Лунный Лондо</h2>
+                    <button class="card__like" type="button"></button>
                 </div>
             </div>
 
-            <div class="element">
-                <img src="./images/5748aeeff153e06ecf3c46a38cefd2ca.jpg" class="element__image">
-                <div class="element__text">
-                    <h2 class="element__name">Замок Лотрика</h2>
-                    <button class="element__like"></button>
+            <div class="card">
+                <img src="./images/5748aeeff153e06ecf3c46a38cefd2ca.jpg" alt="замок" class="card__image">
+                <div class="card__text">
+                    <h2 class="card__name">Замок Лотрика</h2>
+                    <button class="card__like" type="button"></button>
                 </div>
             </div>
 
         </section>
 
         <footer class="footer">
-            <p class="sign">2020 Mesto Russia</p>
+            <p class="sign"> &copy; 2020 Mesto Russia</p>
         </footer>
 
         <div class="poup">
             <div class="poup__container">
-                <button class="poup__close"></button>
+                <button class="poup__close" type="button"></button>
                 <h3 class="poup__tittle">Редактировать профиль</h3>
                 <form class="poup__form">
-                    <input type="text" class="poup__nickname" placeholder="Имя" name="name">
-                    <input type="text" class="poup__subtittle" placeholder="Подпись" name="name">
+                    <input type="text" class="poup__section poup__section_nickname" placeholder="Имя" name="name">
+                    <input type="text" class="poup__section poup__section_subtittle" placeholder="Подпись" name="name">
                 </form>
                 <button class="poup__button">Сохранить</button>
             </div>
@@ -101,6 +102,7 @@
 
     </div>
 </body>
-<script src="./script.js"></script>
+
+<script src="./scripts/script.js" defer></script>
 
 </html>

@@ -7,11 +7,13 @@
 @media screen and (max-width :1024px) {
     .sign {
         margin-left: 40px;
+        margin-left: 0;
     }
 }
 
-@media screen and (max-width :1024px) {
+@media screen and (max-width :320px) {
     .sign {
-        margin-left: 0;
+        font-size: 14px;
+        line-height: 17px;
     }
 }

@@ -3,8 +3,7 @@
 @import url(./__container/poup__container.css);
 @import url(./__form/poup__form.css);
 @import url(./__nickname/poup__nickname.css);
-@import url(./__subtittle/poup__subtittle.css);
-@import url(./__tittle/poup__tittle.css);
+@import url(./__section/poup__section.css);
 .poup {
     display: none;
     position: fixed;

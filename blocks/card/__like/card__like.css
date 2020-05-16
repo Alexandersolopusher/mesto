@@ -1,7 +1,11 @@
-.element__like {
+.card__like {
     background-image: url(../../../images/like.svg);
     border: none;
     width: 21px;
     height: 19px;
     background-color: transparent;
+}
+
+.card__like:hover {
+    opacity: 0.6;
 }

@@ -5,6 +5,7 @@
 @import url(./__subtittle/user__subtittle.css);
 @import url(./__editnickname/user__editnickname.css);
 @import url(./__nickname/user__nickname.css);
+@import url(./__pen-button/user__pen-button.css);
 .user {
     display: flex;
     position: relative;
