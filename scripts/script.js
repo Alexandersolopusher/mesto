@@ -19,29 +19,29 @@ function closePoup() {
     poupOld.classList.remove('poup_opened'); //закрывает поуп
 }
 
-let formElement = document.querySelector('.poup__button');
-const poupSave = document.querySelector('.poup__button');
+let formElement = document.querySelector('.poup__container');
+//const poupSave = document.querySelector('.poup__button'); лишний
 
-function formSubmitHandler(evt) { //передает поуп текст на стену
+function formSubmitHandler(evt) { //передает поуп текст на стену + enter
     evt.preventDefault();
     userNick.textContent = poupName.value;
     userJob.textContent = poupJob.value;
     closePoup();
 }
 formElement.addEventListener('submit', formSubmitHandler);
-poupSave.addEventListener('click', formSubmitHandler);
+//poupSave.addEventListener('click', formSubmitHandler); лишний
 poupClose.addEventListener('click', closePoup);
 userEdit.addEventListener('click', openPopup);
 //попытки в Ентер
-const keyEnter = 13;
+//const keyEnter = 13;
 
-function onEnter(evt) {
-    if (evt.which == keyEnter) {
-        userNick.textContent = poupName.value;
-        userJob.textContent = poupJob.value;
-        closePoup();
-    }
-}
-poupName.addEventListener('keypress', onEnter);
-poupJob.addEventListener('keypress', onEnter);
+//function onEnter(evt) {
+//if (evt.which == keyEnter) {
+// userNick.textContent = poupName.value;
+//  userJob.textContent = poupJob.value;
+//  closePoup();
+// }
+//}
+//poupName.addEventListener('keypress', onEnter);
+//poupJob.addEventListener('keypress', onEnter);
 //получилось так пока :( Но получилось.
