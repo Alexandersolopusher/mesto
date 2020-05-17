@@ -6,6 +6,7 @@
 @import url(./__editnickname/user__editnickname.css);
 @import url(./__nickname/user__nickname.css);
 @import url(./__pen-button/user__pen-button.css);
+@import url(./__plus-icon/user__plus-icon.css);
 .user {
     display: flex;
     position: relative;

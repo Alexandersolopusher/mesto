@@ -2,7 +2,7 @@
 .header {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #a5a5a5;
+    border-bottom: 1px solid #545454;
     min-height: 74px;
     max-width: 882px;
     margin: auto;
