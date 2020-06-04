@@ -1,0 +1,17 @@
+@import url(./__container/poup-image__container.css);
+@import url(./__picture/poup-image__picture.css);
+@import url(./__text/poup-image__text.css);
+@import url(./__close/poup-image__close.css);
+.poup-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s ease-out;
+    opacity: 0;
+    visibility: hidden;
+}

@@ -1,0 +1,29 @@
+.user__edit {
+    width: 24px;
+    height: 24px;
+    color: #fff;
+    border: 1px solid #fff;
+    margin-left: 17px;
+    cursor: pointer;
+    margin-top: 46px;
+    background-color: transparent;
+}
+
+.user__edit:hover {
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 1024px) {
+    .user__edit {
+        margin-top: 40px;
+    }
+}
+
+@media screen and (max-width: 565px) {
+    .user__edit {
+        width: 18px;
+        height: 18px;
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+}
