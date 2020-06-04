@@ -36,54 +36,6 @@
         </section>
 
         <section class="photo-gallery">
-            <div class="card">
-                <img src="./images/anor_londo.jpg" alt="собор и закат" class="card__image">
-                <div class="card__text">
-                    <h2 class="card__name">Анор - Лондо</h2>
-                    <button class="card__like" type="button"></button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="./images/painted-world.jpeg" alt="деревня в тумане" class="card__image">
-                <div class="card__text">
-                    <h2 class="card__name">Олачиль</h2>
-                    <button class="card__like" type="button"></button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="./images/deep-tample.jpg" alt="ворота" class="card__image">
-                <div class="card__text">
-                    <h2 class="card__name">Храм Глубин</h2>
-                    <button class="card__like" type="button"></button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="./images/fierling.jpg" alt="место для костра" class="card__image">
-                <div class="card__text">
-                    <h2 class="card__name">Храм Огня</h2>
-                    <button class="card__like" type="button"></button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="./images/snow.jpg" alt="город в снегу" class="card__image">
-                <div class="card__text">
-                    <h2 class="card__name">Лунный Лондо</h2>
-                    <button class="card__like" type="button"></button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="./images/5748aeeff153e06ecf3c46a38cefd2ca.jpg" alt="замок" class="card__image">
-                <div class="card__text">
-                    <h2 class="card__name">Замок Лотрика</h2>
-                    <button class="card__like" type="button"></button>
-                </div>
-            </div>
-
         </section>
 
         <footer class="footer">
@@ -102,7 +54,37 @@
             </div>
         </div>
 
+        <div class="poup-photo">
+            <div class="poup__container">
+                <button class="poup-photo__close" type="button"></button>
+                <h3 class="poup__tittle">Новое место</h3>
+                <form class="poup__form">
+                    <input type="text" class="poup__section poup__section_placename" placeholder="Название" name="name">
+                    <input type="text" class="poup__section poup__section_placlink" placeholder="Ссылка на картинку" name="name">
+                    <button class="poup__button poup__button_addTemplateItem">Сохранить</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="poup-image">
+            <figure class="poup-image__container">
+                <button class="poup-image__close"></button>
+                <img src="" alt="" class="poup-image__picture">
+                <figcaption class="poup-image__text"></figcaption>
+            </figure>
+        </div>
+
     </div>
+    <template id="photo-container">
+    <div class="card">
+        <button class="card__delete"></button>
+        <img src="" alt="" class="card__image">
+        <div class="card__text">
+            <h2 class="card__name"></h2>
+            <button class="card__like" type="button"></button>
+        </div>
+    </div>
+</template>
     <script src="./scripts/script.js" defer></script>
 </body>
 

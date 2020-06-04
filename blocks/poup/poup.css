@@ -5,7 +5,7 @@
 @import url(./__section/poup__section.css);
 @import url(./__tittle/poup__tittle.css);
 .poup {
-    display: none;
+    /*display: none;*/
     position: fixed;
     top: 0;
     left: 0;
@@ -14,4 +14,8 @@
     background-color: rgba(0, 0, 0, .5);
     align-items: center;
     justify-content: center;
+    /*трай*/
+    transition: opacity 1s ease-out;
+    opacity: 0;
+    visibility: hidden;
 }

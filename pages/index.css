@@ -8,5 +8,7 @@
 @import url(../blocks/card/card.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/sign/sign.css);
+@import url(../blocks/poup-image/poup-image.css);
+@import url(../blocks/poup-photo/poup-photo.css);
 @import url(../blocks/poup/poup.css);
 @import url(../blocks/poup/_opened/poup_opened.css);
