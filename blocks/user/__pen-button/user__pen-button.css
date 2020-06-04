@@ -1,9 +1,0 @@
-.user__pen-button {
-    position: relative;
-}
-
-@media screen and (max-width: 565px) {
-    .user__pen-button {
-        padding-bottom: 3px;
-    }
-}
