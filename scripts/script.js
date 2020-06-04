@@ -54,11 +54,10 @@ const cardTextContainer = placeForPhoto.querySelector('.card__text'); //папп
 // добавление новой карты ( все действия с картой, внутри этой функции)
 function addCard(name, link) {
     const photoCard = photoContainer.cloneNode(true); //клонирование из temlate со всем содержимым
-    const card = photoCard.querySelector('.card'); //выбираем саму карт
-    const cardPic = photoCard.querySelector('.card__image'); //определяем внутри клона изо
-    const cardName = photoCard.querySelector('.card__name'); //определяем внутри клона текст
+    const cardPic = photoCard.querySelector('.card__image'); //определяем  изо
+    const cardName = photoCard.querySelector('.card__name'); //определяем  текст
     const cardLike = photoCard.querySelector('.card__like'); //определяем кнопку Лайка 
-    const cardDel = card.querySelector('.card__delete'); //определяем в ней кнопку удалени
+    const cardDel = photoCard.querySelector('.card__delete'); //определяем  кнопку удалени
     cardPic.src = link; //присваиваем значения ссылке
     cardPic.alt = name; // присваиваем значения "Альту"
     cardName.textContent = name; // присваиваем значения имени
