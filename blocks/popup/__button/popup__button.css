@@ -1,4 +1,4 @@
-.poup__button {
+.popup__button {
     width: 100%;
     height: 50px;
     font-size: 18px;
@@ -11,6 +11,6 @@
     border-style: none;
 }
 
-.poup__button.poup__button:hover {
+.popup__button.poup__button:hover {
     background-color: rgba(0, 0, 0, 0.8);
 }

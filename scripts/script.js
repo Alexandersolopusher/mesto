@@ -25,34 +25,40 @@ const initialCards = [{
 ];
 
 
-const profile = document.querySelector('.profile');
-const userMain = document.querySelector('.user'); //let
-const userData = document.querySelector('.user__paperdol');
 const userNick = document.querySelector('.user__nickname'); //let
 const userEdit = document.querySelector('.user__edit'); //КНОПКА ЭДИТ
 const userJob = document.querySelector('.user__subtittle'); //let
-const poupOld = document.querySelector('.poup'); //let
-const poupClose = document.querySelector('.poup__close'); //закрытие попа юзера
-const poupName = document.querySelector('.poup__section_nickname'); //let имя в попе top
-const poupJob = document.querySelector('.poup__section_subtittle'); //let подпись попа bot
-const poupPhoto = document.querySelector('.poup-photo'); //ПОП С РЕДАКТОРОМ ФОТО
+const popup = document.querySelector('.popup'); //let
+const popupClose = document.querySelector('.popup__close'); //закрытие попа юзера
+const popupName = document.querySelector('.popup__section_nickname'); //let имя в попе top
+const popupJob = document.querySelector('.popup__section_subtittle'); //let подпись попа bot
 const photoEdit = document.querySelector('.user__place-button') //КНОПКА +
-const poupPlaceName = document.querySelector('.poup__section_placename') // Название места
-const poupPlaceLink = document.querySelector('.poup__section_placlink') // поле для ссылки на место
-const poupPhotoClose = document.querySelector('.poup-photo__close') //закрытие попа с Фото
-const poupWithImage = document.querySelector('.poup-image'); //поуп с картинкой
-const poupFullImage = document.querySelector('.poup-image__picture'); //картинка БОЛЬШАЯ на поупе
-const poupImageText = document.querySelector('.poup-image__text'); // текст под картинкой Поупа
-const poupImageClose = document.querySelector('.poup-image__close'); //закрытие попа с картинкой
-const cardSave = document.querySelector('.poup__button');
+const popupPlaceName = document.querySelector('.popup__section_placename') // Название места
+const popupPlaceLink = document.querySelector('.popup__section_placlink') // поле для ссылки на место
+const popupWithImage = document.querySelector('.popup_image-add'); //поуп с картинкой
+const popupFullImage = document.querySelector('.popup__image-picture'); //картинка БОЛЬШАЯ на поупе
+const popupImageText = document.querySelector('.popup__image-text'); // текст под картинкой Поупа
 //try hard
 const photoContainer = document.querySelector('#photo-container').content; //выбрали темлейт
 const placeForPhoto = document.querySelector('.photo-gallery'); //сюда вставлять
-const card = placeForPhoto.querySelector('.card'); //карта
-const cardTextContainer = placeForPhoto.querySelector('.card__text'); //паппердоль карты
+const popupAddPhoto = document.querySelector('.popup_photo-add');
+const popupAddPhotoClose = document.querySelector('.popup__close_photo-add');
+const inserttolistButton = document.querySelector('.popup__button_addTemplateItem'); // "сохранить" кнопка добавления
+const formElement = document.querySelector('.popup__container');
+const popupImageAddClose = document.querySelector('.popup__close_image-add');
 
-// добавление новой карты ( все действия с картой, внутри этой функции)
-function addCard(name, link) {
+
+function likeCard(like) { //функция лайка карты
+    like.target.classList.toggle('card__like_active');
+}
+
+
+function deleteCard(del) { //функция говорит, что удаляет БЛИЖАЙШУЮ в разметке карту
+    const photoсardtoDel = del.target.closest('.card');
+    photoсardtoDel.remove();
+}
+
+function addCard(name, link) { // добавление новой карты ( все действия с картой, внутри этой функции)
     const photoCard = photoContainer.cloneNode(true); //клонирование из temlate со всем содержимым
     const cardPic = photoCard.querySelector('.card__image'); //определяем  изо
     const cardName = photoCard.querySelector('.card__name'); //определяем  текст
@@ -61,84 +67,51 @@ function addCard(name, link) {
     cardPic.src = link; //присваиваем значения ссылке
     cardPic.alt = name; // присваиваем значения "Альту"
     cardName.textContent = name; // присваиваем значения имени
-
     //лайк карты
-    cardLike.addEventListener('click', function(like) { //функция, которая говорит, что при взаимодействии с кнопкой лайка присваивается или наоборот модификатор активности
-        like.target.classList.toggle('card__like_active');
-    });
-
-    //удаление карты
-    function DeleteCard() { //функция говорит, что удаляет БЛИЖАЙШУЮ в разметке карту
-        const photoCardtoDel = cardDel.closest('.card');
-        photoCardtoDel.remove();
+    cardLike.addEventListener('click', likeCard);
+    //удление карты
+    cardDel.addEventListener('click', deleteCard); //слушатель на удаление
+    function popupbigFill() { //заполнение большого поупа картинкой + открытие
+        popupFullImage.src = cardPic.src;
+        popupFullImage.alt = cardPic.alt;
+        popupImageText.textContent = cardName.textContent;
+        openClosePopup(popupWithImage);
     }
-    cardDel.addEventListener('click', DeleteCard); //слушатель на удаление
-
-    // заполнение большого поупа ( с картинкой) + открытие
-    function bigPoupFill() {
-        poupFullImage.src = cardPic.src;
-        poupImageText.textContent = cardName.textContent;
-        openBigPoup();
-    }
-
-    cardPic.addEventListener('click', bigPoupFill); //слушатель на заполнение
+    cardPic.addEventListener('click', popupbigFill);
     return photoCard; //возвращение 
 }
+
 initialCards.forEach((item) => placeForPhoto.append(addCard(item.name, item.link))); //добавление в конец
 
 function addItem() {
-    placeForPhoto.prepend(addCard(poupPlaceName.value, poupPlaceLink.value)); //добавление новых карт в контейнер
+    placeForPhoto.prepend(addCard(popupPlaceName.value, popupPlaceLink.value)); //добавление новых карт в контейнер
 }
 
-function addCardfromForm(evt) { //из формы
+function handleSubmitForm(evt) { //из формы
     evt.preventDefault();
     addItem();
-    closePopupPhoto();
+    openClosePopup(popupAddPhoto);
 }
 
-const insertTolistButton = document.querySelector('.poup__button_addTemplateItem'); // "сохранить" кнопка добавления
-insertTolistButton.addEventListener('click', addCardfromForm);
-
-
-function openPopup() { //открывает поуп и заполняет его с экрана
-    poupOld.classList.add('poup_opened');
-    poupName.value = userNick.textContent;
-    poupJob.value = userJob.textContent;
+function openClosePopup(popup) { //открывает и закрывает поуп и заполняет его с экрана
+    popup.classList.toggle('popup_opened'); // Добавили тоггле
+    popupName.value = userNick.textContent;
+    popupJob.value = userJob.textContent;
 }
-
-function closePoup() { //закрывает поуп с юзером по крестику
-    poupOld.classList.remove('poup_opened');
-}
-
-let formElement = document.querySelector('.poup__container');
-
 
 function formSubmitHandler(evt) { //передает поуп текст на стену + enter
     evt.preventDefault();
-    userNick.textContent = poupName.value;
-    userJob.textContent = poupJob.value;
-    closePoup();
+    userNick.textContent = popupName.value;
+    userJob.textContent = popupJob.value;
+    openClosePopup(popup);
 }
+
+popupClose.addEventListener('click', () => openClosePopup(popup));
+userEdit.addEventListener('click', () => openClosePopup(popup));
+photoEdit.addEventListener('click', () => openClosePopup(popupAddPhoto));
+popupAddPhotoClose.addEventListener('click', () => openClosePopup(popupAddPhoto));
+popupImageAddClose.addEventListener('click', () => openClosePopup(popupWithImage));
 formElement.addEventListener('submit', formSubmitHandler);
-poupClose.addEventListener('click', closePoup);
-userEdit.addEventListener('click', openPopup);
+inserttolistButton.addEventListener('click', handleSubmitForm);
 
-function openPopupPhoto() { //открытие редактора фото
-    poupPhoto.classList.add('poup_opened');
-}
-photoEdit.addEventListener('click', openPopupPhoto);
-
-function closePopupPhoto() { // закрытие редактора фото по крестику
-    poupPhoto.classList.remove('poup_opened');
-}
-poupPhotoClose.addEventListener('click', closePopupPhoto);
-
-function openBigPoup() { //открытие большого поупа
-    poupWithImage.classList.add('poup_opened');
-}
-
-function closeBigPhoto() { //закрытие большого поупа
-    poupWithImage.classList.remove('poup_opened')
-};
-poupImageClose.addEventListener('click', closeBigPhoto);
-poupFullImage.addEventListener('click', closeBigPhoto);
+//PS Спасибо за совет с popup общим) Долго мучался и не понимал для чего. В результате код в разы уменьшился, да и "Слушателей стало меньше" ^^

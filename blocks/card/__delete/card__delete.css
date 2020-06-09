@@ -6,6 +6,7 @@
     position: absolute;
     background: url(../../../images/delete.svg);
     border: none;
+    cursor: pointer;
 }
 
 .card__delete:hover {

@@ -1,4 +1,6 @@
 Проект с фотогалереей.
 В проекте использовалась адаптивная верстка под разрешения 300 и 1280. Так же Grid и Flex. Включает в себя шрифты семейства Inter Использован JavaScript.
 
-Ссылка на GHpages:https://alexandersolopusher.github.io/mesto/index.html
+Возможно редактировать имя и род занятий в профиле, добавлять/удалять карточки с фотографиями. Проставлять "лайки"
+
+Ссылка на GHpages:https://alexandersolopusher.github.io/mesto/

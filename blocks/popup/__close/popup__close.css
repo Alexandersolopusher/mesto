@@ -1,4 +1,4 @@
-.poup__close {
+.popup__close {
     position: absolute;
     top: -50px;
     right: -47px;
@@ -10,6 +10,6 @@
     border: none;
 }
 
-.poup__close:hover {
+.popup__close:hover {
     opacity: 0.6;
 }
