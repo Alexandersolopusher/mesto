@@ -52,10 +52,18 @@ function likeCard(like) { //функция лайка карты
     like.target.classList.toggle('card__like_active');
 }
 
+// не совсем понятно насчет camelCase ^) Он вроде имеет в виду то, что идет маленькая буква, затем большая. Это и сделал.
+function cardDelete(del) { //функция говорит, что удаляет БЛИЖАЙШУЮ в разметке карту
+    const photocardDel = del.target.closest('.card');
+    photocardDel.remove();
+}
 
-function deleteCard(del) { //функция говорит, что удаляет БЛИЖАЙШУЮ в разметке карту
-    const photoсardtoDel = del.target.closest('.card');
-    photoсardtoDel.remove();
+function fillPopupBig(img) {
+    openClosePopup(popupWithImage);
+    const element = img.target.closest('.card'); //заполнение большого поупа картинкой + открытие
+    popupFullImage.src = element.querySelector('.card__image').src;
+    popupFullImage.alt = element.querySelector('.card__name').alt;
+    popupImageText.textContent = element.querySelector('.card__name').textContent;
 }
 
 function addCard(name, link) { // добавление новой карты ( все действия с картой, внутри этой функции)
@@ -70,14 +78,9 @@ function addCard(name, link) { // добавление новой карты ( �
     //лайк карты
     cardLike.addEventListener('click', likeCard);
     //удление карты
-    cardDel.addEventListener('click', deleteCard); //слушатель на удаление
-    function popupbigFill() { //заполнение большого поупа картинкой + открытие
-        popupFullImage.src = cardPic.src;
-        popupFullImage.alt = cardPic.alt;
-        popupImageText.textContent = cardName.textContent;
-        openClosePopup(popupWithImage);
-    }
-    cardPic.addEventListener('click', popupbigFill);
+    cardDel.addEventListener('click', cardDelete); //слушатель на удаление
+    //открытие большого попа
+    cardPic.addEventListener('click', fillPopupBig);
     return photoCard; //возвращение 
 }
 
@@ -113,5 +116,3 @@ popupAddPhotoClose.addEventListener('click', () => openClosePopup(popupAddPhoto)
 popupImageAddClose.addEventListener('click', () => openClosePopup(popupWithImage));
 formElement.addEventListener('submit', formSubmitHandler);
 inserttolistButton.addEventListener('click', handleSubmitForm);
-
-//PS Спасибо за совет с popup общим) Долго мучался и не понимал для чего. В результате код в разы уменьшился, да и "Слушателей стало меньше" ^^
