@@ -46,9 +46,11 @@
             <div class="popup__container">
                 <button class="popup__close" type="button"></button>
                 <h3 class="popup__tittle">Редактировать профиль</h3>
-                <form class="popup__form">
-                    <input type="text" class="popup__section popup__section_nickname" placeholder="Имя" name="name">
-                    <input type="text" class="popup__section popup__section_subtittle" placeholder="Подпись" name="name">
+                <form class="popup__form" name="editForm" novalidate>
+                    <input type="text" class="popup__section popup__section_nickname" placeholder="Имя" id="name" minlength="2" maxlength="40" required>
+                    <span id="name-error" class="popup__input"></span>
+                    <input type="text" class="popup__section popup__section_subtittle" placeholder="Подпись" id="job" minlength="2" maxlength="200" required>
+                    <span id="job-error" class="popup__input"></span>
                     <button class="popup__button">Сохранить</button>
                 </form>
             </div>
@@ -58,10 +60,12 @@
             <div class="popup__container popup__container_photo-add">
                 <button class="popup__close popup__close_photo-add" type="button"></button>
                 <h3 class="popup__tittle">Новое место</h3>
-                <form class="popup__form">
-                    <input type="text" class="popup__section popup__section_placename" placeholder="Название" name="name">
-                    <input type="text" class="popup__section popup__section_placlink" placeholder="Ссылка на картинку" name="name">
-                    <button class="popup__button popup__button_addTemplateItem">Сохранить</button>
+                <form class="popup__form" novalidate>
+                    <input type="text" class="popup__section popup__section_placename" placeholder="Название" id="place" minlength="1" maxlength="30" required>
+                    <span id="place-error" class="popup__input"></span>
+                    <input type="url" class="popup__section popup__section_placlink" placeholder="Ссылка на картинку" id="url" required>
+                    <span id="url-error" class="popup__input"></span>
+                    <button class="popup__button popup__button_addTemplateItem popup__button_inputDiz">Сохранить</button>
                 </form>
             </div>
         </div>
@@ -85,6 +89,7 @@
         </div>
     </div>
 </template>
+    <script src="./scripts/validate.js"></script>
     <script src="./scripts/script.js"></script>
 </body>
 

@@ -1,0 +1,11 @@
+.popup__button_inputDiz {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    opacity: .25;
+}
+
+.popup__button_inputDiz:hover {
+    opacity: .25;
+    cursor: none;
+}

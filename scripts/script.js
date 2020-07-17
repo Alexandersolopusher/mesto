@@ -52,7 +52,7 @@ function likeCard(like) { //функция лайка карты
     like.target.classList.toggle('card__like_active');
 }
 
-// не совсем понятно насчет camelCase ^) Он вроде имеет в виду то, что идет маленькая буква, затем большая. Это и сделал.
+// не совсем понятно насчет camelCase ^) 
 function cardDelete(del) { //функция говорит, что удаляет БЛИЖАЙШУЮ в разметке карту
     const photocardDel = del.target.closest('.card');
     photocardDel.remove();
@@ -90,6 +90,33 @@ function addItem() {
     placeForPhoto.prepend(addCard(popupPlaceName.value, popupPlaceLink.value)); //добавление новых карт в контейнер
 }
 
+//CLICK
+function targetClick(evt) {
+    const popupOp = evt.target.closest('.popup')
+    if (evt.target === popupOp) {
+        popupOp.classList.remove('popup_opened');
+        document.removeEventListener('click', targetClick);
+    }
+}
+//ESC
+function targetEsc(evt) {
+    if (evt.keyCode === 27) {
+        const popupOp = document.querySelector('.popup_opened');
+        popupOp.classList.remove('popup_opened')
+        document.removeEventListener('keydown', targetEsc);
+    }
+}
+// CLICK + ESC
+function escAndClickPopup(popup) {
+    if (popup.classList.contains('popup_opened')) {
+        document.addEventListener('click', targetClick);
+        document.addEventListener('keydown', targetEsc);
+    } else {
+        document.addEventListener('click', targetClick);
+        document.addEventListener('keydown', targetEsc);
+    }
+}
+
 function handleSubmitForm(evt) { //из формы
     evt.preventDefault();
     addItem();
@@ -100,6 +127,7 @@ function openClosePopup(popup) { //открывает и закрывает по
     popup.classList.toggle('popup_opened'); // Добавили тоггле
     popupName.value = userNick.textContent;
     popupJob.value = userJob.textContent;
+    escAndClickPopup(popup); // + закрытия по CLICK and ESC
 }
 
 function formSubmitHandler(evt) { //передает поуп текст на стену + enter
@@ -116,3 +144,4 @@ popupAddPhotoClose.addEventListener('click', () => openClosePopup(popupAddPhoto)
 popupImageAddClose.addEventListener('click', () => openClosePopup(popupWithImage));
 formElement.addEventListener('submit', formSubmitHandler);
 inserttolistButton.addEventListener('click', handleSubmitForm);
+enableValidation(obj);

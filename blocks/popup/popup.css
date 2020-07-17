@@ -7,6 +7,9 @@
 @import url(./__image-container/popup__image-container.css);
 @import url(./__image-picture/popup__image-picture.css);
 @import url(./__image-text/popup__image-text.css);
+@import url(./__button/_inputDiz/popup__button_inputDiz.css);
+@import url(./__section/_error/popup__section_error.css);
+@import url(./__input-error/popup__input-error.css);
 .popup {
     /*display: none;*/
     position: fixed;
