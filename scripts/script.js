@@ -52,14 +52,13 @@ function likeCard(like) { //функция лайка карты
     like.target.classList.toggle('card__like_active');
 }
 
-// не совсем понятно насчет camelCase ^) 
 function cardDelete(del) { //функция говорит, что удаляет БЛИЖАЙШУЮ в разметке карту
     const photocardDel = del.target.closest('.card');
     photocardDel.remove();
 }
 
 function fillPopupBig(img) {
-    openClosePopup(popupWithImage);
+    openPopup(popupWithImage);
     const element = img.target.closest('.card'); //заполнение большого поупа картинкой + открытие
     popupFullImage.src = element.querySelector('.card__image').src;
     popupFullImage.alt = element.querySelector('.card__name').alt;
@@ -90,58 +89,65 @@ function addItem() {
     placeForPhoto.prepend(addCard(popupPlaceName.value, popupPlaceLink.value)); //добавление новых карт в контейнер
 }
 
-//CLICK
-function targetClick(evt) {
-    const popupOp = evt.target.closest('.popup')
-    if (evt.target === popupOp) {
-        popupOp.classList.remove('popup_opened');
-        document.removeEventListener('click', targetClick);
-    }
-}
 //ESC
 function targetEsc(evt) {
     if (evt.keyCode === 27) {
-        const popupOp = document.querySelector('.popup_opened');
-        popupOp.classList.remove('popup_opened')
-        document.removeEventListener('keydown', targetEsc);
-    }
-}
-// CLICK + ESC
-function escAndClickPopup(popup) {
-    if (popup.classList.contains('popup_opened')) {
-        document.addEventListener('click', targetClick);
-        document.addEventListener('keydown', targetEsc);
-    } else {
-        document.addEventListener('click', targetClick);
-        document.addEventListener('keydown', targetEsc);
+        closePopup();
     }
 }
 
 function handleSubmitForm(evt) { //из формы
     evt.preventDefault();
     addItem();
-    openClosePopup(popupAddPhoto);
+    closePopup(popupAddPhoto);
 }
 
-function openClosePopup(popup) { //открывает и закрывает поуп и заполняет его с экрана
-    popup.classList.toggle('popup_opened'); // Добавили тоггле
+function isInsidePopup(event, popup) {
+    const popupRect = popup.getBoundingClientRect() // размеры модальной сети
+    return event.clientX >= popupRect.left && event.clientX <= popupRect.right && //event. clientY, clientX — это позиция курсора по X и Y
+        event.clientY >= popupRect.top && event.clientY <= popupRect.bottom
+}
+
+function onClickOutsidePopup(event) {
+    const popupOpened = document.querySelector('.popup_opened');
+    const popupContainer = popupOpened.querySelector(popupOpened === popupWithImage ? '.popup__image-picture' : '.popup__container')
+
+    if (!isInsidePopup(event, popupContainer)) {
+        closePopup()
+    }
+}
+
+function initializeFields() {
     popupName.value = userNick.textContent;
     popupJob.value = userJob.textContent;
-    escAndClickPopup(popup); // + закрытия по CLICK and ESC
+}
+
+function openPopup(popup) {
+    popup.classList.add('popup_opened');
+    setTimeout(() => document.addEventListener('click', onClickOutsidePopup), 0); // без таймаута будет учтён клик открытия, так что окно сразу закроется
+    document.addEventListener('keydown', targetEsc);
+}
+
+function closePopup() {
+    const popupOpened = document.querySelector('.popup_opened');
+    popupOpened.classList.remove('popup_opened');
+    document.removeEventListener('click', onClickOutsidePopup);
+    document.removeEventListener('keydown', targetEsc);
 }
 
 function formSubmitHandler(evt) { //передает поуп текст на стену + enter
     evt.preventDefault();
     userNick.textContent = popupName.value;
     userJob.textContent = popupJob.value;
-    openClosePopup(popup);
+    closePopup(popup);
 }
 
-popupClose.addEventListener('click', () => openClosePopup(popup));
-userEdit.addEventListener('click', () => openClosePopup(popup));
-photoEdit.addEventListener('click', () => openClosePopup(popupAddPhoto));
-popupAddPhotoClose.addEventListener('click', () => openClosePopup(popupAddPhoto));
-popupImageAddClose.addEventListener('click', () => openClosePopup(popupWithImage));
+userEdit.addEventListener('click', () => {
+    initializeFields();
+    openPopup(popup);
+});
+photoEdit.addEventListener('click', () => openPopup(popupAddPhoto));
 formElement.addEventListener('submit', formSubmitHandler);
 inserttolistButton.addEventListener('click', handleSubmitForm);
-enableValidation(obj);
+popupClose.addEventListener('click', closePopup); // не обязательно, т.к крестик тоже будет считаться за оверлей 
+enableValidation(formReq);

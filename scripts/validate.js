@@ -1,4 +1,4 @@
-const obj = {
+const formReq = {
     formSelector: '.popup__form',
     inputSelector: '.popup__section',
     submitButtonSelector: '.popup__button',
@@ -21,27 +21,36 @@ function checkInput(evt, inputErrorClass, errorClass) { //передаем по�
     }
 }
 
+function enableInputValidation(form, validation) {
+    const inputItems = Array.from(
+        form.querySelectorAll(validation.inputSelector) //определяем инпуты
+    );
+    inputItems.forEach((input) => { //теперь на каждый инпут вешаем слушатели срабатывания функции ошибок валидации ( CheckInput)
+        input.addEventListener('input', (evt) =>
+            checkInput(evt, validation.inputErrorClass, validation.errorClass)
+        );
+    });
+}
+
+function validateFormOnInput(form, validation) {
+    const submitButton = form.querySelector(validation.submitButtonSelector); //отмена стандартного поведения кнопки и ее определение
+    form.addEventListener('input', () => {
+        const isFormValid = form.checkValidity();
+        submitButton.disabled = !isFormValid;
+        submitButton.classList.toggle(validation.inactiveButtonClass, !isFormValid);
+    });
+}
+
 function enableValidation(validation) {
     const formItems = Array.from(
         document.querySelectorAll(validation.formSelector) // определяем все внутри формы
     );
     formItems.forEach((form) => {
-        const inputItems = Array.from(
-            form.querySelectorAll(validation.inputSelector) //определяем инпуты
-        );
-        inputItems.forEach((input) => { //теперь на каждый инпут вешаем слушатели срабатывания функции ошибок валидации ( CheckInput)
-            input.addEventListener('input', (evt) =>
-                checkInput(evt, validation.inputErrorClass, validation.errorClass)
-            );
-        });
-        const submitButton = form.querySelector(validation.submitButtonSelector); //отмена стандартного поведения кнопки и ее определение
+        enableInputValidation(form, validation)
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
         });
         //блок кнопки
-        form.addEventListener('input', () => {
-            const isFormValid = form.checkValidity();
-            submitButton.classList.toggle(validation.inactiveButtonClass, !isFormValid);
-        });
+        validateFormOnInput(form, validation);
     });
-};
+}
