@@ -28,25 +28,24 @@ const initialCards = [{
 const userNick = document.querySelector('.user__nickname'); //let
 const userEdit = document.querySelector('.user__edit'); //КНОПКА ЭДИТ
 const userJob = document.querySelector('.user__subtittle'); //let
-const popup = document.querySelector('.popup'); //let
-const popupClose = document.querySelector('.popup__close'); //закрытие попа юзера
+const popup = document.querySelector('.popup'); // ПОПАП С РЕДАКТОРОМ ПРОФИЛЯ
+const popupClose = document.querySelector('.popup__close'); //КНОПКА ЗАКРЫТИЯ РЕДАКТОРА ПРОФИЛЯ
 const popupName = document.querySelector('.popup__section_nickname'); //let имя в попе top
 const popupJob = document.querySelector('.popup__section_subtittle'); //let подпись попа bot
 const photoEdit = document.querySelector('.user__place-button') //КНОПКА +
 const popupPlaceName = document.querySelector('.popup__section_placename') // Название места
 const popupPlaceLink = document.querySelector('.popup__section_placlink') // поле для ссылки на место
-const popupWithImage = document.querySelector('.popup_image-add'); //поуп с картинкой
+const popupWithImage = document.querySelector('.popup_image-add'); //ПОПАП С КАРТИНКОЙ
 const popupFullImage = document.querySelector('.popup__image-picture'); //картинка БОЛЬШАЯ на поупе
 const popupImageText = document.querySelector('.popup__image-text'); // текст под картинкой Поупа
 //try hard
 const photoContainer = document.querySelector('#photo-container').content; //выбрали темлейт
 const placeForPhoto = document.querySelector('.photo-gallery'); //сюда вставлять
-const popupAddPhoto = document.querySelector('.popup_photo-add');
-const popupAddPhotoClose = document.querySelector('.popup__close_photo-add');
-const inserttolistButton = document.querySelector('.popup__button_addTemplateItem'); // "сохранить" кнопка добавления
-const formElement = document.querySelector('.popup__container');
-const popupImageAddClose = document.querySelector('.popup__close_image-add');
-
+const popupAddPhoto = document.querySelector('.popup_photo-add'); //ПОПАП С РЕДАКТОРОМ КАРТОЧКИ
+const popupAddPhotoClose = document.querySelector('.popup__close_photo-add'); //КНОПКА ЗАКРЫТИЯ РЕДАКТОРА КАРТОЧКИ
+const buttonToList = document.querySelector('.popup__button_addTemplateItem'); // "сохранить" кнопка добавления
+const popupEnterContainer = document.querySelector('.popup__container');
+const popupImageAddClose = document.querySelector('.popup__close_image-add'); //КРЕСТИК ЗАКРЫТИЯ ПОПАПА С КАРТИНКОЙ
 
 function likeCard(like) { //функция лайка карты
     like.target.classList.toggle('card__like_active');
@@ -91,8 +90,9 @@ function addItem() {
 
 //ESC
 function targetEsc(evt) {
+    const popupOpened = document.querySelector('.popup_opened');
     if (evt.keyCode === 27) {
-        closePopup();
+        closePopup(popupOpened);
     }
 }
 
@@ -101,19 +101,13 @@ function handleSubmitForm(evt) { //из формы
     addItem();
     closePopup(popupAddPhoto);
 }
-
-function isInsidePopup(event, popup) {
-    const popupRect = popup.getBoundingClientRect() // размеры модальной сети
-    return event.clientX >= popupRect.left && event.clientX <= popupRect.right && //event. clientY, clientX — это позиция курсора по X и Y
-        event.clientY >= popupRect.top && event.clientY <= popupRect.bottom
-}
-
+//CLICK
 function onClickOutsidePopup(event) {
     const popupOpened = document.querySelector('.popup_opened');
-    const popupContainer = popupOpened.querySelector(popupOpened === popupWithImage ? '.popup__image-picture' : '.popup__container')
+    const popupContainer = popupOpened.querySelector('.container')
 
-    if (!isInsidePopup(event, popupContainer)) {
-        closePopup()
+    if (!popupContainer.contains(event.target)) {
+        closePopup(event.target.closest('.popup')); //
     }
 }
 
@@ -124,18 +118,23 @@ function initializeFields() {
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
-    setTimeout(() => document.addEventListener('click', onClickOutsidePopup), 0); // без таймаута будет учтён клик открытия, так что окно сразу закроется
+    popup.addEventListener('click', onClickOutsidePopup);
     document.addEventListener('keydown', targetEsc);
 }
 
-function closePopup() {
-    const popupOpened = document.querySelector('.popup_opened');
-    popupOpened.classList.remove('popup_opened');
-    document.removeEventListener('click', onClickOutsidePopup);
+function closePopup(popup) {
+    popup.classList.remove('popup_opened')
+    popup.removeEventListener('click', onClickOutsidePopup);
     document.removeEventListener('keydown', targetEsc);
 }
+//function closePopup() {
+//    const popupOpened = document.querySelector('.popup_opened');
+//    popupOpened.classList.remove('popup_opened');
+//    popupOpened.removeEventListener('click', onClickOutsidePopup);
+//    document.removeEventListener('keydown', targetEsc);
+//}
 
-function formSubmitHandler(evt) { //передает поуп текст на стену + enter
+function formToWall(evt) { //передает поуп текст на стену + enter
     evt.preventDefault();
     userNick.textContent = popupName.value;
     userJob.textContent = popupJob.value;
@@ -146,8 +145,11 @@ userEdit.addEventListener('click', () => {
     initializeFields();
     openPopup(popup);
 });
+popupImageAddClose.addEventListener('click', () => closePopup(popupWithImage)); //Закрытие попапа с картинкой по крестику
+popupAddPhotoClose.addEventListener('click', () => closePopup(popupAddPhoto)); //Закрытие редактора карточки по кресту
 photoEdit.addEventListener('click', () => openPopup(popupAddPhoto));
-formElement.addEventListener('submit', formSubmitHandler);
-inserttolistButton.addEventListener('click', handleSubmitForm);
-popupClose.addEventListener('click', closePopup); // не обязательно, т.к крестик тоже будет считаться за оверлей 
-enableValidation(formReq);
+popupEnterContainer.addEventListener('submit', formToWall);
+buttonToList.addEventListener('click', handleSubmitForm); //поп сохранением закрыт ( в добавлении карточки)
+popupClose.addEventListener('click', () => closePopup(popup)); //Закрытие редактора профиля по кресту
+
+enableValidation(validationParams);

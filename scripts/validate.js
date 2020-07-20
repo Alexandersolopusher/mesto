@@ -1,4 +1,4 @@
-const formReq = {
+const validationParams = {
     formSelector: '.popup__form',
     inputSelector: '.popup__section',
     submitButtonSelector: '.popup__button',
